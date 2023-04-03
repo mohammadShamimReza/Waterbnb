@@ -28,7 +28,7 @@ const UserMenu =() => {
           "
           onClick={() => {}}
           >
-            Airbnb you hone
+            Waterbnb you hone
           </div>
           <div className="
             p-4
