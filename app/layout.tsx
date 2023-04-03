@@ -1,8 +1,8 @@
 import{Nunito} from "next/font/google"
 import ClientOnly from "./api/components/ClientOnly"
-import Modal from "./api/components/modals/Modal"
 import Navbar from "./api/components/navbar/Navbar"
 import './globals.css'
+import RegisterModal from "./api/components/modals/RegisterModal"
 
 export const metadata = {
   title: 'Waterbnb',
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ClientOnly>
-          <Modal title={'hello world'} isOpen />
+          <RegisterModal />
           <Navbar />
         </ClientOnly>
         

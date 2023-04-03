@@ -12,7 +12,7 @@ interface ModalProps {
     actionLabel?: string;
     disabled?: boolean;
     secondaryAction?: ()=>void;
-    secondaryLabel?: string;
+    secondaryActionLabel?: string;
 }
 const Modal: React.FC<ModalProps> =({
     isOpen,
@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> =({
     actionLabel,
     disabled,
     secondaryAction,
-    secondaryLabel
+    secondaryActionLabel
 }) => {
     const[showModal, setShowModal] = useState(isOpen);
 
@@ -41,6 +41,12 @@ const Modal: React.FC<ModalProps> =({
             onClose();
         },300)
     }, [disabled, onClose])
+  const handleSubmit = useCallback(() => {
+    if (disabled) { 
+      return;
+
+    }
+  },[disabled])
   
     const handleSecondaryAction = useCallback(() => {
       if (disabled || !secondaryAction) {
@@ -67,7 +73,8 @@ const Modal: React.FC<ModalProps> =({
 
             `}
             >
-              <div className="
+              <div
+                className="
               translate
               h-full
               lg:h-auto
@@ -82,9 +89,11 @@ const Modal: React.FC<ModalProps> =({
               bg-white
               outline-none
               focus:outline-none
-              ">
+              "
+              >
                 {/* HEADER */}
-                <div className="
+                <div
+                  className="
                   flex
                   items-center
                   p-6
@@ -92,41 +101,63 @@ const Modal: React.FC<ModalProps> =({
                   justify-center
                   relative
                   border-b-[1px]
-                ">
+                "
+                >
                   <button
                     onClick={handleClose}
-                    className='
+                    className="
                     p-1
                     border-0
                     hover:opacity-70
                     transition
                     absolute
                     left-9
-                    '
+                    "
                   >
                     <IoMdClose size={18} />
                   </button>
-                  <div className="
+                  <div
+                    className="
                     text-lg font-semibold
-                  ">
+                  "
+                  >
                     {title}
                   </div>
                 </div>
                 {/* BODY */}
-                <div className="
+                <div
+                  className="
                     relative p-6 flex-auto
-                ">
+                "
+                >
                   {body}
                 </div>
                 {/* Footer */}
-                <div className="
+                <div
+                  className="
                   flex flex-col gap-2 p-6
-                ">  
-                  <div className="
+                "
+                >
+                  <div
+                    className="
                     flex flex-row items-center gap-4 w-full
-                    ">
-                    <Button label='my button' />
-                    </div>
+                    "
+                  >
+                    {secondaryAction && secondaryActionLabel && (
+                      <Button
+                        outline
+                        disabled={disabled}
+                        label={secondaryActionLabel}
+                        onClick={handleSecondaryAction}
+                      />
+                    )}
+
+                    <Button
+                      disabled={disabled}
+                      label={actionLabel}
+                      onClick={handleSubmit}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
