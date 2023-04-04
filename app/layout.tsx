@@ -1,8 +1,9 @@
 import{Nunito} from "next/font/google"
-import ClientOnly from "./api/components/ClientOnly"
-import Navbar from "./api/components/navbar/Navbar"
+import ClientOnly from "./components/ClientOnly"
+import Navbar from "./components/navbar/Navbar"
 import './globals.css'
-import RegisterModal from "./api/components/modals/RegisterModal"
+import RegisterModal from "./components/modals/RegisterModal"
+import ToasterProvider from "./Providers/ToasterProvider"
 
 export const metadata = {
   title: 'Waterbnb',
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ClientOnly>
+          <ToasterProvider />
           <RegisterModal />
           <Navbar />
         </ClientOnly>
